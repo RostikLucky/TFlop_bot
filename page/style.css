@@ -1,0 +1,496 @@
+/*//////////////////////*/
+/*/                    /*/
+/*/     Переменные     /*/
+/*/                    /*/
+/*//////////////////////*/
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+
+:root {
+	/*/ Размеры /*/
+	--menu-size: 80px;
+	--menu-ico-size: 48px;
+	--menu-ico-margin: 8px;
+	--menu-ico-height: 45px;
+	--menu-ico-font-size: 28px;
+	/*/ Цвета /*/
+	--b-radius: 0px;
+	--page-bg: #161b23;
+	--menu-bg: #252f3f;
+	--main-bg: #252f3f50;
+	--menu-ico-color: #6b7280;
+	--menu-ico-bg-active: #dcdcdc;
+	--menu-ico-bg-hover: #ffffff20;
+	--menu-ico-color-active: #7e3af2;
+}
+
+/*//////////////////////*/
+/*/                    /*/
+/*/      Элементы      /*/
+/*/                    /*/
+/*//////////////////////*/
+
+body {
+    overflow: hidden;
+	background: #161b2300;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Exo 2', sans-serif;
+}
+
+a {
+	transition: 0.5s;
+	text-decoration: none;
+	color: var(--menu-ico-bg-active);
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+input, select {
+    outline: none;
+    font-size: 16px;
+    margin-top: 8px;
+    transition: 0.5s;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 2px;
+    border-radius: 0.5rem;
+    width: calc(100% - 16px);
+    background: var(--page-bg);
+    border: 1px solid var(--menu-bg);
+    color: var(--menu-ico-bg-active);
+    height: calc((var(--menu-ico-font-size) * 1.2) - 2px);
+}
+
+select {
+	-webkit-appearance: none;
+	height: calc((var(--menu-ico-font-size) * 1.2) + 2px);
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+label {
+    width: auto;
+    height: 15px;
+    padding: 2px;
+    display: block;
+    cursor: pointer;
+    padding-right: 4px;
+    position: relative;
+    border-radius: 0.3rem;
+    background: var(--page-bg);
+    border: 1px solid #7e3af254;
+}
+
+label > div {
+	font-size: 14px; 
+	margin-top: -2px; 
+	margin-left: 3px;
+}
+
+input:checked + label > div {
+	margin-left: 16px;
+}
+
+label > i {
+	opacity: 0;
+	font-size: 14px;
+	margin-top: -1.5px;
+	position: absolute;
+	color: var(--menu-ico-bg-active);
+}
+
+input:checked + label > i {
+	opacity: 1;
+}
+
+input:hover, input:focus {
+	background: var(--menu-bg);
+}
+
+input:checked + label {
+	background: var(--menu-ico-color-active);
+}
+
+button {
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+    margin-top: 8px;
+    transition: 0.5s;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 2px;
+    border-radius: 0.5rem;
+    width: calc(100% - 16px);
+    -webkit-text-stroke-width: thin;
+    color: var(--menu-ico-bg-active);
+    border: 1px solid var(--menu-bg);
+    background: var(--menu-ico-color-active);
+    height: calc((var(--menu-ico-font-size) * 1.2) + 2px);
+}
+
+button:hover {
+	background: var(--menu-ico-bg-hover);
+}
+
+[tip] .tooltip {
+	opacity: 0;
+	z-index: 99;
+	color: white;
+	padding: 4px;
+	position: fixed;
+    font-size: 10px;
+    padding-left: 8px;
+    line-height: 10px;
+    padding-right: 8px;
+    visibility: hidden;
+    border-radius: 0.5rem;
+    border: 1px solid #20103d54;
+    transition: opacity 0.3s, visibility 0s;
+    background: var(--menu-ico-color-active);
+}
+
+[tip]:hover .tooltip {
+	opacity: 1;
+	visibility: visible;
+}
+
+
+/*//////////////////////*/
+/*/                    /*/
+/*/   Меню навигации   /*/
+/*/                    /*/
+/*//////////////////////*/
+
+.in_body {
+	width: 100vw;
+	height: 100vh;
+	background: var(--page-bg);
+	border-radius: var(--b-radius);
+    box-shadow: 0px 0px 10px 6px var(--page-bg);
+}
+
+#menu {
+	z-index: 10;
+	height: 100vh;
+	display: grid;
+	position: fixed;
+    align-content: center;
+    width: var(--menu-size);
+    background: var(--menu-bg);
+    box-shadow: 1px 0px 10px 0px var(--menu-bg);
+    border-radius: var(--b-radius) var(--b-radius) 0px;
+}
+
+#icon {
+	top: 0px;
+	display: grid;
+    line-height: 0px;
+    position: absolute;
+    align-content: center;
+    justify-content: center;
+    width: var(--menu-size);
+	height: var(--menu-size);
+	color: var(--menu-ico-bg-active);
+	font-size: var(--menu-ico-font-size);
+	border-radius: var(--b-radius) 0px 0px;
+	background: var(--menu-ico-color-active);
+}
+
+#nav {
+	width: 100%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+#exit {
+	bottom: 0px;
+	display: grid;
+    position: absolute;
+    align-content: center;
+    justify-content: center;
+    width: var(--menu-size);
+	height: var(--menu-size);
+}
+
+.nav_elem {
+	cursor: pointer;
+	transition: 0.5s;
+    text-align: center;
+	border-radius: 0.5rem;
+	width: var(--menu-ico-size);
+	height: var(--menu-ico-size);
+	color: var(--menu-ico-color);
+	margin-top: var(--menu-ico-margin);
+	line-height: var(--menu-ico-height);
+	font-size: var(--menu-ico-font-size);
+	margin-bottom: var(--menu-ico-margin);
+}
+
+
+.nav_elem_active {
+	color: var(--menu-ico-color-active);
+}
+
+.nav_elem_active:not(i) {
+	background-color: var(--menu-ico-bg-active);
+}
+
+.nav_elem:hover:not(.nav_elem_active) {
+	background-color: var(--menu-ico-bg-hover);
+}
+
+/*//////////////////////*/
+/*/                    /*/
+/*/    Верхнее меню    /*/
+/*/                    /*/
+/*//////////////////////*/
+
+#header {
+	z-index: 9;
+	width: 100vw;
+	display: grid;
+	position: fixed;
+    align-content: center;
+	height: var(--menu-size);
+	padding-left: calc(var(--menu-size) + var(--menu-ico-margin) * 4);
+}
+
+#header_title {  
+    width: fit-content;
+    text-align: center;
+    border-radius: 0.5rem;
+    height: var(--menu-ico-size);
+    line-height: var(--menu-ico-height);
+    color: var(--menu-ico-color-active);
+    font-size: var(--menu-ico-font-size);
+    background: var(--menu-ico-bg-active);
+    margin-top: calc(var(--menu-ico-margin) * 2);
+    padding-left: calc(var(--menu-ico-margin) * 2);
+    padding-right: calc(var(--menu-ico-margin) * 2);
+}
+
+#header_title > i {
+	margin-right: 8px;
+}
+
+/*//////////////////////*/
+/*/                    /*/
+/*/    Главное окно    /*/
+/*/                    /*/
+/*//////////////////////*/
+
+#ver {
+	display: contents;
+}
+
+#main {
+	position: fixed;
+	margin-right: calc(var(--menu-ico-margin) * 4);
+	margin-bottom: calc(var(--menu-ico-margin) * 3);
+	margin-top: calc(var(--menu-size) + var(--menu-ico-margin) * 3);
+	margin-left: calc(var(--menu-size) + var(--menu-ico-margin) * 4);
+    width: calc(100vw - var(--menu-size) - (var(--menu-ico-margin) * 7));
+    height: calc(100vh - var(--menu-size) - (var(--menu-ico-margin) * 6));
+}
+
+.main_window {
+	display: none;
+	font-size: 18px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border-radius: 0.5rem;
+	background: var(--main-bg);
+	color: var(--menu-ico-bg-active);
+	padding: calc(var(--menu-ico-margin) * 2);
+	height: calc(100% - var(--menu-ico-margin) * 4);
+	width: calc((100% - var(--menu-ico-margin) * 4) + 10px);
+	padding-right: calc((var(--menu-ico-margin) * 2) - 10px);
+}
+
+.main_window::-webkit-scrollbar {
+	width: 10px;
+}
+
+.main_window::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	border: 1px solid var(--menu-bg);
+	background-color: var(--page-bg);
+}
+
+.active_window {
+	display: block;
+}
+
+/*//////////////////////*/
+/*/                    /*/
+/*/    Уведомления     /*/
+/*/                    /*/
+/*//////////////////////*/
+
+#alerts {
+	opacity: 0;
+    z-index: 99;
+    color: white;
+    bottom: 20px;
+    display: grid;
+    font-size: 16px;
+    cursor: pointer;
+	position: absolute;
+	overflow-x: scroll;
+    overflow-y: hidden;
+	padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+    align-items: center;
+    margin-bottom: -62px;
+    border-radius: 0.5rem;
+    height: calc(var(--menu-size) / 2);
+    background: var(--menu-ico-color-active);
+    margin-right: calc(var(--menu-ico-margin) * 4);
+    margin-left: calc(var(--menu-size) + var(--menu-ico-margin) * 4);
+    width: calc(100vw - 20px - var(--menu-size) - (var(--menu-ico-margin) * 7));
+}
+
+#alerts::-webkit-scrollbar {
+	width: 100%;
+	height: 1px;
+}
+
+#alerts::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+}
+
+/*/////////////////////*/
+/*/                   /*/
+/*/     Аккаунты      /*/
+/*/                   /*/
+/*/////////////////////*/
+
+.account_lable {
+	width: 100%; 
+	height: 50px;
+	display: flex;
+	position: relative;
+	margin-bottom: 16px;
+    align-items: center;
+    border-radius: 0.5rem;
+    background: var(--page-bg);
+	border: 1px solid var(--menu-bg); 
+}
+
+.account_image {
+	width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+    background-size: contain;
+}
+
+.account_username {
+	margin-left: 10px; 
+	margin-bottom: 2px;
+}
+
+.account_status {
+	width: 100%;
+    height: 30px;
+ 	color: white; 
+    opacity: 0.6;
+    display: grid;
+    font-size: 12px;
+    margin-left: 12px;
+  	overflow-x: hidden;
+    overflow-y: scroll;
+    align-items: center;
+}
+
+.account_status::-webkit-scrollbar {
+	width: 10px;
+}
+
+.account_status::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	border: 1px solid var(--menu-bg);
+	background-color: var(--page-bg);
+}
+
+.account_menu {
+	right: 0px;
+	display: flex;
+    margin-left: 10px;
+	text-align: center;
+
+}
+.account_menu > div {
+	width: 35px;
+    height: 35px;
+    cursor: pointer;
+    line-height: 32px;
+    margin-right: 10px;
+    border-radius: 0.5rem;
+    color: var(--menu-ico-bg-active);
+    background: var(--menu-ico-color-active);
+}
+
+
+/*//////////////////////*/
+/*/                    /*/
+/*/     Статистика     /*/
+/*/                    /*/
+/*//////////////////////*/
+
+.stat_info {
+	margin: 8px;
+	padding: 7px;
+	height: 24px;
+	display: flex;
+    font-size: 16px;
+    line-height: 23px;
+    width: fit-content;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 0.5rem;
+    color: var(--menu-ico-color-active);
+    background: var(--menu-ico-bg-active);
+}
+
+.stat_info > div {
+	margin-left: 3px;
+    margin-right: 3px;
+}
+
+.stat_info > i {
+	margin-right: 8px;
+}
+
+.stat_log {
+	width: 100%;
+	max-width: 800px;
+	overflow-x: scroll; 
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.stat_log::-webkit-scrollbar {
+	width: 100%;
+	height: 1px;
+}
+
+.stat_log::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+}

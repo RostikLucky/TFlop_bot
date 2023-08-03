@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TFlop_bot</title>
+	<link rel="stylesheet" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body>
+	<div class="in_body">
+		<!------------------------>
+		<!--    Уведомления     -->
+		<!------------------------>
+		<div id="alerts"><div id="alerts_data"></div></div>
+		<!------------------------>
+		<!--   Меню навигации   -->
+		<!------------------------>
+		<div id="menu">
+			<div id="icon"><i class="uil uil-robot"></i></div>
+			<div id="nav">
+				<div class="nav_elem nav_elem_active" title="Главная страница" window="main_page"><i class="uil uil-estate nav_elem_active"></i></div>
+				<div class="nav_elem" title="Настройки бота" window="settings_page"><i class="uil uil-sliders-v-alt"></i></div>
+				<div class="nav_elem" title="Аккаунты Instagram" window="accounts_page"><i class="uil uil-users-alt"></i></div>
+				<div class="nav_elem" title="Добавить аккаунт" window="add_account_page"><i class="uil uil-user-plus"></i></div>
+			</div>
+			<div id="exit">
+				<div class="nav_elem" title="Выход"><i class="uil uil-signout"></i></div>
+			</div>
+		</div>
+		<!------------------------->
+		<!--    Верхнее меню     -->
+		<!------------------------->
+		<div id="header" class="pywebview-drag-region"><div id="header_title"><i class="uil uil-estate"></i> Главная страница</div></div>
+		<!------------------------->
+		<!--    Главное окно     -->
+		<!------------------------->
+		<div id="main">
+			<!------------------------>
+			<!--  Главная страница  -->
+			<!------------------------>
+			<div class="main_window active_window" id="main_page">
+				<div style="display: grid; align-content: center; justify-content: center; align-items: center; justify-items: center; width: 100%; height: 100%; margin-top: -35px;">
+					<div style="width: 100px; height: 100px; font-size: 70px; text-align: center; margin-bottom: 10px; background: #7e3af2; line-height: 88px; border-radius: 0.5rem;">
+						<i class="uil uil-robot"></i>
+					</div>
+					<div style="display: flex; flex-wrap: nowrap; justify-content: center;">
+						<div class="stat_info"><i class="uil uil-coins"></i> Ваш заработок: <div id="stat_eaned_coins">0</div>монет</div>
+						<div class="stat_info"><i class="uil uil-money-stack"></i> Ваш заработок: <div id="stat_eaned_money">0.00₽</div></div>
+						<div class="stat_info"><i class="uil uil-clipboard-notes"></i> Выполнено <div id="stat_tasks">0/0</div> заданий</div>
+					</div>
+					<div style="display: flex; flex-wrap: nowrap; justify-content: center; position: relative;">
+						<div class="stat_info"><i class="uil uil-users-alt"></i> Используется <div id="stat_accounts_count">0/0</div> аккаунт</div>
+						<div class="stat_info"><i class="uil uil-suitcase-alt"></i> Категория: <div id="stat_category">все задания</div></div>
+						<div class="stat_info" style="width: 219px;  justify-content: center;"><i class="uil uil-stopwatch"></i> Время работы: <div id="stat_time">00:00:00</div></div>
+					</div>
+					<div class="stat_info stat_log"><i class="uil uil-comment-alt-info"></i> Лог:<div id="stat_log">Бот ожидает вашего запуска</div></div>
+					<div style="position: absolute; bottom: 56px; font-size: 16px; opacity: 0.4; width: 100%; text-align: center">
+						<a target="_blank" href="https://insta.tflop.ru/i/rostiklucky">TFlop_bot ver. <div id="ver"></div></a> | 
+						Разработчик: <a target="_blank" href="https://t.me/RostikLucky">@RostikLucky</a> | 
+						Обновления: <a target="_blank" href="https://t.me/RostikLucky_news">@RostikLucky_news</a>
+					</div>
+					<button style="height: 40px; width: 100%; position: absolute; bottom: -8px; left: 0;" id="start_bot">Ожидайте, идёт загрузка!</button>
+				</div>
+			</div>
+			<!-------------------------->
+			<!--   Настройки бота     -->
+			<!-------------------------->
+			<div class="main_window" id="settings_page">
+				<div style="display: flex; justify-content: center; margin-top: 5px;">
+					<div style="width: 100%; display: grid; margin-right: 8px;">
+						Задержка перед выполнением заданий
+						<input type="text" id="delay_task" placeholder="00 сек.">
+					</div>
+					<div style="width: 100%; display: grid; margin-left: 8px;">
+						Задержка перед проверкой заданий
+						<input type="text" id="delay_task_check" placeholder="00 сек.">
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid;">
+						Сменить аккаунт через
+						<input type="text" id="account_change" placeholder="00 зад.">
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid; margin-right: 8px;">
+						Уходить в сон после выполнения
+						<input type="text" id="sleep_task" placeholder="00 зад.">
+					</div>
+					<div style="width: 100%; display: grid; margin-left: 8px;">
+						Уходить в сон на
+						<input type="text" id="sleep_time" placeholder="00 мин.">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 1px;">
+					<input type="checkbox" id="use_sid">
+					<label for="use_sid">
+						<i class="uil uil-check"></i>
+						<div tip="Отключите эту функцию, если у вас ошибки sessionid"> Использовать sessionid для проверки</div>
+					</label>
+					<input type="checkbox" id="use_relogin">
+					<label for="use_relogin" style="margin-left: 4px">
+						<i class="uil uil-check"></i>
+						<div tip="Если Instagram вышел из аккаунта, бот автоматически зайдет в него"> Автоматическая переавторизация</div>
+					</label>
+				</div>
+				<div style="display: flex; margin-left: 1px; margin-top: 6px;">
+					<input type="checkbox" id="use_proxy_task">
+					<label for="use_proxy_task">
+						<i class="uil uil-check"></i>
+						<div tip="Отключите эту функцию, если вы используете VPN и т.п."> Использовать прокси при выполнении заданий</div>
+					</label>
+					<input type="checkbox" id="use_relogin_proxy">
+					<label for="use_relogin_proxy" style="margin-left: 4px">
+						<i class="uil uil-check"></i>
+						<div tip="Если вы входите в аккаунт с использованием прокси, включите данную функцию"> Использовать прокси при переавторизации</div>
+					</label>
+				</div>
+				<div style="display: flex; margin-left: 1px; margin-top: 6px;">
+					<input type="checkbox" id="notify">
+					<label for="notify">
+						<i class="uil uil-check"></i>
+						<div tip="Уведомления приходят на ваш компьютер"> Включить уведомления об ошибках</div>
+					</label>
+				</div>
+				<button style="height: 40px; width: 100%; margin-bottom: 5px;" id="dev_downl">Сохранить лог работы бота</button>
+			</div>
+			<!-------------------------->
+			<!--  Аккаунты Instagram  -->
+			<!-------------------------->
+			<div class="main_window" id="accounts_page"></div>
+			<!------------------------>
+			<!--  Добавить аккаунт  -->
+			<!------------------------>
+			<div class="main_window" id="add_account_page">
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid; margin-right: 8px;">
+						Логин от Instagram
+						<input type="text" id="add_login" placeholder="Логин">
+					</div>
+					<div style="width: 100%; display: grid; margin-left: 8px;">
+						Пароль от Instagram
+						<input type="password" id="add_password" placeholder="Пароль">
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center; display: none;">
+					<div style="width: 100%; display: grid;">
+						Или sessionid от Instagram
+						<input type="text" id="add_session" placeholder="sessionid">
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center; display: none;" id="2FABlock">
+					<div style="width: 100%; display: grid;">
+						<div style="display: flex; align-items: flex-end;">
+							<div>Введите 2FA код из приложения Google Authenticator</div>
+						</div>
+						<div style="display: flex;">
+							<input type="text" id="2FA" placeholder="2FA код">
+						</div>
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center; display: none;" id="2FABlock_SMS">
+					<div style="width: 100%; display: grid;">
+						<div style="display: flex; align-items: flex-end;">
+							<div>Введите код</div>
+						</div>
+						<div style="display: flex;">
+							<input type="text" id="2FA_SMS" placeholder="2FA код">
+							<button style="margin-left: 14px;width: 130px;" id="2FA_SMS_BTN">Войти</button>
+						</div>
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid;">
+						<div style="display: flex; align-items: flex-end;">
+							<div>Прокси IPv4</div> 
+							<div style="font-size: 12px; margin-left: 7px; margin-bottom: 1px; color: white; opacity: 0.6;">
+								<a href="https://proxy-seller.io/?partner=RN7I9QBWXSGGPN" target="_blank" style="color: white;">(http или https)</a>
+							</div>
+						</div>
+						<div style="display: flex;">
+							<input type="text" id="proxy_input" placeholder="scheme://username:password@host:port">
+							<button style="margin-left: 14px;width: 130px;" id="check_proxy">Проверить</button>
+						</div>
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid;">
+						<div style="display: flex; align-items: flex-end;">
+							<div>API ключ</div> 
+							<div style="font-size: 12px; margin-left: 7px; margin-bottom: 1px; color: white; opacity: 0.6;">
+								<a href="https://insta.tflop.ru/settings/developers/" target="_blank" style="color: white;">(получить ключ)</a>
+							</div>
+						</div>
+						<div style="display: flex;">
+							<input type="text" id="add_api" placeholder="6557129052.db3dal8kd23ca1fb443b3bdc82aa71f">
+							<button style="margin-left: 14px;width: 130px;" id="check_api">Проверить</button>
+						</div>
+					</div>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 100%; display: grid;">
+						<div style="display: flex; align-items: flex-end;">
+							<div>Instagram UserAgent</div>
+						</div>
+						<div style="display: flex;">
+							<input type="text" id="IUA" placeholder="Instagram 242.0.0.16.111 Android (29/10; 360dpi; 810x1581; HUAWEI; MAR-LX1M; HWMAR; kirin710; ru_RU; 381185644) AppleWebKit/537.36" readonly>
+							<button style="margin-left: 14px;width: 180px;" id="generate_IUA">Сгенерировать</button>
+						</div>
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 1px;">
+					<input type="checkbox" id="use_proxy" checked>
+					<label for="use_proxy">
+						<i class="uil uil-check"></i>
+						<div tip="Отключите эту функцию, если не смогли авторизоваться"> Использовать прокси при входе</div>
+					</label>
+				</div>
+				<button style="height: 40px; width: 100%; margin-bottom: 5px;" id="add_account">Добавить аккаунт в бота</button>
+				<div style="font-size: 14px; opacity: 0.3; margin-left: 2px;">Для работы с ботом, ваш аккаунт TFlop должен быть зарегистрирован по <a target="_blank" href="https://insta.tflop.ru/i/rostiklucky">реферальной ссылке!</a></div>
+			</div>
+		</div>
+	</div>
+	<script src="IUA.js"></script>
+	<script src="jquery.js"></script>
+	<script src="makedinput.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
